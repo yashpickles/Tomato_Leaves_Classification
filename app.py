@@ -29,7 +29,7 @@ from werkzeug.utils import secure_filename
 app = Flask(__name__)
 
 # Model saved with Keras model.save()
-MODEL_PATH ='model_inception_2.h5'
+MODEL_PATH ='model_inrestnet.h5'
 
 # Load your trained model
 model = load_model(MODEL_PATH)
@@ -46,10 +46,7 @@ def model_predict(img_path, model):
     x = x / 255
     x = np.expand_dims(x, axis=0)
 
-    # Be careful how your trained model deals with the input
-    # otherwise, it won't make correct prediction!
-    # x = preprocess_input(x)
-
+    
     preds = model.predict(x)
     preds = np.argmax(preds, axis=1)
     if preds == 0:
